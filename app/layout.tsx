@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import BottomNavbar from "@/components/bottom-navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  display: 'swap', // Ensures text is visible while the font loads
+  variable: '--font-dm-sans', // Define a CSS variable (useful for Tailwind CSS)
+});
+
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -23,12 +31,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${dmSans.variable}`}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${dmSans.className} antialiased`}
       >
+        <div className="mb-20">
         {children}
+        </div>
+        <BottomNavbar />
+
       </body>
     </html>
   );
 }
+
